@@ -1,9 +1,9 @@
-package ru.lebedev.se.lesson2;
+package ru.lebedev.se.lesson2.persons;
 
 public class PersonMain {
 
     public static void main(String[] args) {
-        int size = 1000000;
+        int size = 100;
         PersonArray arr = new PersonArray(size);
         arr.insert("Vasya", 10);
         arr.insert("Igor", 15);

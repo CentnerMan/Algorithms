@@ -1,11 +1,10 @@
-package ru.lebedev.se.lesson2;
+package ru.lebedev.se.lesson2.persons;
 
 class PersonArray {
     private Person[] arr;
     private int size;
 
     public PersonArray(int size) {
-        this.size = 0;
         this.arr = new Person[size];
     }
 

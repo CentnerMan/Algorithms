@@ -1,4 +1,4 @@
-package ru.lebedev.se.lesson2;
+package ru.lebedev.se.lesson2.persons;
 
 class Person{
     private String name;
