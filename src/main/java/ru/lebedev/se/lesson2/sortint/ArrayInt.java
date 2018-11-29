@@ -10,8 +10,8 @@ class ArrayInt {
     }
 
     public void display() {
-        for (int i = 0; i < this.size; i++) {
-            System.out.println(this.arr[i]);
+        for (int i = 0; i < size; i++) {
+            System.out.println(arr[i]);
         }
     }
 
@@ -19,10 +19,10 @@ class ArrayInt {
 
     public boolean find(int search) {
         int i;
-        for (i = 0; i < this.size; i++) {
-            if (this.arr[i] == search) break;
+        for (i = 0; i < size; i++) {
+            if (arr[i] == search) break;
         }
-        if (i == this.size)
+        if (i == size)
             return false;
         else
             return true;
@@ -32,38 +32,38 @@ class ArrayInt {
 
     public void delete(int search) {
         int i = 0;
-        for (i = 0; i < this.size; i++) {
-            if (this.arr[i] == search) break;
+        for (i = 0; i < size; i++) {
+            if (arr[i] == search) break;
         }
 
-        for (int j = i; j < this.size - 1; j++) {
-            this.arr[j] = this.arr[j + 1];
+        for (int j = i; j < size - 1; j++) {
+            this.arr[j] = arr[j + 1];
         }
-        this.size--;
+        size--;
     }
 
     // Вставка ----------------------------------------------------------------------------------------------------
 
     public void insert(int number) {
-        this.arr[this.size] = number;
-        this.size++;
+        arr[size] = number;
+        size++;
     }
 
     // Меняем элементы местами ------------------------------------------------------------------------------------
 
     private void change(int a, int b) {
-        int tmp = this.arr[a];
-        this.arr[a] = this.arr[b];
-        this.arr[b] = tmp;
+        int tmp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = tmp;
     }
 
     // Сортировка пузырьком ---------------------------------------------------------------------------------------
 
     public void sortBubbleInt() {
         int out, in;
-        for (out = this.size - 1; out >= 1; out--) {
+        for (out = size - 1; out >= 1; out--) {
             for (in = 0; in < out; in++) {
-                if (this.arr[in] > (this.arr[in + 1])) {
+                if (arr[in] > (arr[in + 1])) {
                     change(in, in + 1);
                 }
             }
@@ -75,10 +75,10 @@ class ArrayInt {
 
     public void sortSelectInt() {
         int out, in, marker;
-        for (out = 0; out < this.size; out++) {
+        for (out = 0; out < size; out++) {
             marker = out;
-            for (in = out + 1; in < this.size; in++) {
-                if (this.arr[in] < (this.arr[marker])) {
+            for (in = out + 1; in < size; in++) {
+                if (arr[in] < (arr[marker])) {
                     marker = in;
                 }
             }
@@ -89,14 +89,14 @@ class ArrayInt {
 
     public void sortInsertObjectInt() {
         int in, out;
-        for (out = 1; out < this.size; out++) {
-            int temp = this.arr[out];
+        for (out = 1; out < size; out++) {
+            int temp = arr[out];
             in = out;
-            while (in > 0 && this.arr[in - 1] > temp) {
-                this.arr[in] = this.arr[in - 1];
+            while (in > 0 && arr[in - 1] > temp) {
+                arr[in] = arr[in - 1];
                 --in;
             }
-            this.arr[in] = temp;
+            arr[in] = temp;
         }
     }
 }
