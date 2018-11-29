@@ -9,8 +9,8 @@ class PersonArray {
     }
 
     public void display() {
-        for (int i = 0; i < this.size; i++) {
-            System.out.println(this.arr[i].getName() + " " + this.arr[i].getAge());
+        for (int i = 0; i < size; i++) {
+            System.out.println(arr[i].getName() + " " + arr[i].getAge());
         }
     }
 
@@ -18,10 +18,10 @@ class PersonArray {
 
     public boolean find(String search) {
         int i;
-        for (i = 0; i < this.size; i++) {
-            if (this.arr[i].getName().equals(search)) break;
+        for (i = 0; i < size; i++) {
+            if (arr[i].getName().equals(search)) break;
         }
-        if (i == this.size)
+        if (i == size)
             return false;
         else
             return true;
@@ -31,30 +31,30 @@ class PersonArray {
 
     public void delete(String search) {
         int i = 0;
-        for (i = 0; i < this.size; i++) {
-            if (this.arr[i].getName().equals(search)) break;
+        for (i = 0; i < size; i++) {
+            if (arr[i].getName().equals(search)) break;
         }
 
-        for (int j = i; j < this.size - 1; j++) {
-            this.arr[j] = this.arr[j + 1];
+        for (int j = i; j < size - 1; j++) {
+            arr[j] = this.arr[j + 1];
         }
-        this.size--;
+        size--;
     }
 
     // Вставка ----------------------------------------------------------------------------------------------------
 
     public void insert(String name, int age) {
-        this.arr[this.size] = new Person(name, age);
-        this.size++;
+        arr[this.size] = new Person(name, age);
+        size++;
     }
 
     // Сортировка пузырьком ---------------------------------------------------------------------------------------
 
     public void sortBubbleByName() {
         int out, in;
-        for (out = this.size - 1; out >= 1; out--) {
+        for (out = size - 1; out >= 1; out--) {
             for (in = 0; in < out; in++) {
-                if (this.arr[in].getName().compareTo(this.arr[in + 1].getName()) > 0) {
+                if (arr[in].getName().compareTo(arr[in + 1].getName()) > 0) {
                     change(in, in + 1);
                 }
             }
@@ -63,9 +63,9 @@ class PersonArray {
 
     public void sortBubbleByAge() {
         int out, in;
-        for (out = this.size - 1; out >= 1; out--) {
+        for (out = size - 1; out >= 1; out--) {
             for (in = 0; in < out; in++) {
-                if (this.arr[in].getAge() > (this.arr[in + 1].getAge())) {
+                if (arr[in].getAge() > (arr[in + 1].getAge())) {
                     change(in, in + 1);
                 }
             }
@@ -73,19 +73,19 @@ class PersonArray {
     }
 
     private void change(int a, int b) {
-        Person tmp = this.arr[a];
-        this.arr[a] = this.arr[b];
-        this.arr[b] = tmp;
+        Person tmp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = tmp;
     }
 
     // Сортировка выбором -----------------------------------------------------------------------------------------
 
     public void sortSelectByName() {
         int out, in, mark;
-        for (out = 0; out < this.size; out++) {
+        for (out = 0; out < size; out++) {
             mark = out;
-            for (in = out + 1; in < this.size; in++) {
-                if (this.arr[in].getName().compareTo(this.arr[mark].getName()) < 0) {
+            for (in = out + 1; in < size; in++) {
+                if (arr[in].getName().compareTo(arr[mark].getName()) < 0) {
                     mark = in;
                 }
             }
@@ -95,10 +95,10 @@ class PersonArray {
 
     public void sortSelectByAge() {
         int out, in, mark;
-        for (out = 0; out < this.size; out++) {
+        for (out = 0; out < size; out++) {
             mark = out;
-            for (in = out + 1; in < this.size; in++) {
-                if (this.arr[in].getAge() < (this.arr[mark].getAge())) {
+            for (in = out + 1; in < size; in++) {
+                if (arr[in].getAge() < (arr[mark].getAge())) {
                     mark = in;
                 }
             }
@@ -109,27 +109,27 @@ class PersonArray {
 
     public void sortInsertPersonByName() {
         int in, out;
-        for (out = 1; out < this.size; out++) {
-            Person temp = this.arr[out];
+        for (out = 1; out < size; out++) {
+            Person temp = arr[out];
             in = out;
-            while (in > 0 && this.arr[in - 1].getName().compareTo(temp.getName()) > 0) {
-                this.arr[in] = this.arr[in - 1];
+            while (in > 0 && arr[in - 1].getName().compareTo(temp.getName()) > 0) {
+                arr[in] = arr[in - 1];
                 --in;
             }
-            this.arr[in] = temp;
+            arr[in] = temp;
         }
     }
 
     public void sortInsertPersonByAge() {
         int in, out;
-        for (out = 1; out < this.size; out++) {
-            Person temp = this.arr[out];
+        for (out = 1; out < size; out++) {
+            Person temp = arr[out];
             in = out;
-            while (in > 0 && this.arr[in - 1].getAge() > (temp.getAge())) {
-                this.arr[in] = this.arr[in - 1];
+            while (in > 0 && arr[in - 1].getAge() > (temp.getAge())) {
+                arr[in] = arr[in - 1];
                 --in;
             }
-            this.arr[in] = temp;
+            arr[in] = temp;
         }
     }
 
