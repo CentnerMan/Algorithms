@@ -17,14 +17,10 @@ class PersonArray {
     // Поиск ------------------------------------------------------------------------------------------------------
 
     public boolean find(String search) {
-        int i;
-        for (i = 0; i < size; i++) {
-            if (arr[i].getName().equals(search)) break;
+        for (int i = 0; i < size; i++) {
+            if (arr[i].getName().equals(search)) return true;
         }
-        if (i == size)
-            return false;
-        else
-            return true;
+        return false;
     }
 
     // Удаление ---------------------------------------------------------------------------------------------------
@@ -36,7 +32,7 @@ class PersonArray {
         }
 
         for (int j = i; j < size - 1; j++) {
-            arr[j] = this.arr[j + 1];
+            arr[j] = arr[j + 1];
         }
         size--;
     }
@@ -44,7 +40,7 @@ class PersonArray {
     // Вставка ----------------------------------------------------------------------------------------------------
 
     public void insert(String name, int age) {
-        arr[this.size] = new Person(name, age);
+        arr[size] = new Person(name, age);
         size++;
     }
 
@@ -134,3 +130,4 @@ class PersonArray {
     }
 
 }
+
