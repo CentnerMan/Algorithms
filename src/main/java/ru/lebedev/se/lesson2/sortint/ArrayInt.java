@@ -18,14 +18,10 @@ class ArrayInt {
     // Поиск ------------------------------------------------------------------------------------------------------
 
     public boolean find(int search) {
-        int i;
-        for (i = 0; i < size; i++) {
-            if (arr[i] == search) break;
+        for (int i = 0; i < size; i++) {
+            if (arr[i] == search) return true;
         }
-        if (i == size)
-            return false;
-        else
-            return true;
+        return false;
     }
 
     // Удаление ---------------------------------------------------------------------------------------------------
