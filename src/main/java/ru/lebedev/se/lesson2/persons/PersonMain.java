@@ -16,15 +16,17 @@ public class PersonMain {
 
         arr.display();
 
-//        arr.sortBubbleByName();
-        arr.sortSelectByName();
+        arr.sortBubbleByName();
+//        arr.sortSelectByName();
 //        arr.sortInsertPersonByName();
 
         System.out.println("--------------------");
         arr.display();
-
+//
+//        arr.sortBubbleByAge();
+//        arr.sortSelectByAge();
         arr.sortInsertPersonByAge();
-
+//
         System.out.println("--------------------");
         arr.display();
 
