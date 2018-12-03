@@ -15,10 +15,24 @@ public class Deque {
         items = 0;
     }
 
+//    public void insertFirst(char ch) {
+//        if (front > 0)
+//            front--;
+//        deque[front] = ch;
+//        if (front == 0) front = maxSize + 1;
+//        front--;
+//        items++;
+//    }
+
     public void insertFirst(char ch) {
-        if (front > 0)
+        if (front > 0) {
             front--;
-        deque[--front] = ch;
+            deque[front] = ch;
+        }
+        if (front == 0) {
+            front = maxSize;
+            deque[--front] = ch;
+        }
         items++;
     }
 
