@@ -18,11 +18,12 @@ public class FlipString {
             flip.insertFirst(inputStr.charAt(i));
         }
 
-        // Выводим из стека посимвольно
-        for (int i = 0; i < inputStr.length(); i++) {
+        // Выводим из стека посимвольно, пока не опустошим стек
+        while (!flip.isEmpty()) {
 //            outputStr = outputStr + flip.removeLast();
             outputStr = outputStr + flip.removeFirst();
         }
+
         System.out.println(outputStr);
         sc.close();
     }
