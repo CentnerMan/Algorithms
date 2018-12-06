@@ -1,4 +1,4 @@
-package ru.lebedev.se.linkedlist;
+package ru.lebedev.se.linkedlist.twoside;
 
 public class ListApp {
     public static void main(String[] args) {

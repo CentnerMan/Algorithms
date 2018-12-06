@@ -1,4 +1,4 @@
-package ru.lebedev.se.linkedlist;
+package ru.lebedev.se.linkedlist.twoside;
 
 public class Link {
     public String name;
