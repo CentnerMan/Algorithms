@@ -1,24 +1,27 @@
-package ru.lebedev.se.linkedlist;
+package ru.lebedev.se.linkedlist.stack;
+
+import ru.lebedev.se.linkedlist.twoside.LinkedList;
 
 public class StackList {
     private LinkedList list;
-    public StackList(){
+
+    public StackList() {
         list = new LinkedList();
     }
 
-    public void push(String name, int age){
-        list.insert(name, age);
+    public void push(String name, int age) {
+        list.insertFirst(name, age);
     }
 
-    public String pop(){
+    public String pop() {
         return list.delete().name;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return list.isEmpty();
     }
 
-    public void display(){
+    public void display() {
         list.display();
     }
 
