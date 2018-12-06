@@ -1,18 +1,19 @@
 package ru.lebedev.se.linkedlist.iterator;
 
 
-import ru.lebedev.se.linkedlist.Link;
+import ru.lebedev.se.linkedlist.twoside.Link;
 
-public class LinkInterator {
+public class LinkIterator {
     private Link current;
     private Link previous;
     private LinkedList list;
 
-    public LinkInterator(LinkedList list) {
+    public LinkIterator(LinkedList list) {
         this.list = list;
         this.reset();
     }
 
+    // Сброс итератора
     public void reset() {
         current = list.getFirst();
         previous = null;
@@ -22,6 +23,7 @@ public class LinkInterator {
         return (current.next == null);
     }
 
+    // Перемещение к следующему
     public void nextLink() {
         previous = current;
         current = current.next;
