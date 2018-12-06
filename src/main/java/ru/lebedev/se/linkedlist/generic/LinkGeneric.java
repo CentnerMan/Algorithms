@@ -1,4 +1,4 @@
-package ru.lebedev.se.linkedlist.link;
+package ru.lebedev.se.linkedlist.generic;
 
 public class LinkGeneric {
     private String name;
@@ -6,12 +6,12 @@ public class LinkGeneric {
 
     public LinkGeneric next;
 
-    public LinkGeneric(String name, int age){
+    public LinkGeneric(String name, int age) {
         this.name = name;
         this.age = age;
     }
 
-    public void display(){
-        System.out.println("Name: "+this.name+", age: "+this.age);
+    public void display() {
+        System.out.println("Name: " + this.name + ", age: " + this.age);
     }
 }
