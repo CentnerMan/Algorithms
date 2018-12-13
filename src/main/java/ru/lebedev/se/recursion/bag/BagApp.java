@@ -27,17 +27,20 @@ public class BagApp {
 
     private static void pullBag(int i, Bag bag, Item[] items) {
 
-        for (int j = i; j < poolItems; j++) {
-            if (bag.getMaxWeight() >= bag.getCurrentWeight() + items[i].getWeight())
-                bag.add(items[i]);
-            if (bag.getCoastItems() > bestBag.getCoastItems()) {
-                bestBag = bag;
+        if (i >= poolItems) return; // Вне диапазона
+
+        for (int j = i; j < poolItems; j++) { // идем по всем предметам
+
+            if (bag.getMaxWeight() >= bag.getCurrentWeight() + items[j].getWeight()) { // Влезает?
+                bag.add(items[j]); // Запихиваем
+//                bag.display();
+                if (bag.getCoastItems() > bestBag.getCoastItems()) bestBag = bag; // Если оптимальнее - в лучший рюкзак;
             }
-            if (i < poolItems - 1) {
-                pullBag(i + 1, bag, items);
-            }
+            pullBag(j + 1, bag, items);
+            rotate(items, poolItems - 1);
         }
-        rotate(items, poolItems - 1);
+
+
     }
 
     public static void rotate(Item[] items, int newSize) {
