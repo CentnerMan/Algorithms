@@ -1,0 +1,163 @@
+Пример 5. "Задача о рюкзаке". Есть 10 предметов, о которых известны их веса и стоимости.
+Требуется поместить в рюкзак предметы таким образом, чтобы они не превысили допустимый вес для рюкзака
+при максимальной стоимости выбранных предметов.
+Исходные параметры модели – характеристики предметов взяты из [11] и приведены в табл. 18.1.
+
+Таблица 18.1.
+Характеристики предметов
+№ п/п	1	2	3	4	5	6	7	8	9	10
+Вес	10	11	12	13	14	15	16	17	18	19
+Стоимость	18	20	17	19	25	21	27	23	25	24
+Данная задача широко известна [18.9-18.10-18.11], она еще называется задачей о ранце,
+или вариант с английского – "knapsack problem". Предполагается, что один и тот же предмет не может быть взят несколько раз.
+
+Для решения поставленной задачи используем рекурсивный алгоритм, описанный в [18.11],
+где также приводится фрагмент программы на языке программирования MODULA – 2.
+
+Программный код решения примера:
+
+#include <stdio.h>
+#include <conio.h>
+#include <locale.h>
+
+const int limW = 20; // предельный вес выбранных предметов
+enum {N = 10}; // количество предметов
+
+typedef struct {
+	int weight; //// вес или размер предметов
+	int value; //// стоимость или ценность предметов
+} object;
+
+// Формирование структурного типа с параметрами модели
+object obj[] = {10,18, 11,20, 12,17, 13,19, 14,25, 15,21, 16,27, 17,23, 18,25, 19,24};
+
+int maxv; // для инициализации стоимости предметов
+
+// Рекурсивная функция
+int TRY (int i, int tw, int av) {
+	// Попытка включения предмета
+	if (tw + obj[i].weight <= limW)
+		if (i < N-1)
+			TRY(i+1, tw + obj[i].weight, av );
+
+          else if (av > maxv)
+			maxv = av;
+		// Попытка исключения предмета
+	if (av > maxv + obj[i].value)
+		if (i < N-1)
+			TRY(i+1, tw, av - obj[i].value);
+		else
+			maxv = av - obj[i].value;
+	return maxv;
+}
+
+// Главная функция программы
+int main (void) {
+	int i, price;
+	int sumw = 0;
+	int sumv = 0;
+	setlocale(LC_ALL, "rus");
+
+	maxv = obj[0].value; // инициализации стоимости предметов
+	puts("\n\t\t\tЗАДАЧА О РЮКЗАКЕ");
+	puts("\t\t  Характеристика предметов");
+	for (i = 0; i < (4*N + 12); i++)
+		printf("%s", "_");
+
+	printf("\n\n %12s", "Вес:");
+	for (i = 0; i < N; i++) {
+		sumw += obj[i].weight;
+		printf(" %3d", obj[i].weight); }
+
+	printf("\n %12s", "Стоимость:");
+	for (i = 0; i < N; i++) {
+		sumv += obj[i].value;
+		printf(" %3d", obj[i].value); }
+	printf("\n ");
+	for (i = 0; i < (4*N + 12); i++)
+		printf("%s", "_");
+
+printf("\n\n %32s: %d\n", "Общий вес всех предметов", sumw);
+printf(" %32s: %d\n", "Общая стоимость всех предметов", sumv);
+	printf(" %32s: %d\n ", "Допустимый вес рюкзака", limW);
+	     for (i = 0; i < (4*N + 12); i++)
+      printf("%s", "_");
+	// Вызов рекурсивной функции с начальными параметрами
+	price = TRY(0,0,sumv);
+printf("\n\n  Стоимость выбранных предметов: %d\n ", price );
+	for (i = 0; i < (4*N + 12); i++)
+		printf("%s", "_");
+
+	printf("\n\n ... Нажмите любую клавишу: ");
+	_getch();
+	return 0;
+}
+
+//---------------------------------------------------------------------------------------
+
+Next variant
+
+int knap(int i,int cost,int weight){
+   if (i>=N) return cost; else
+    {
+      int t1=knap(i+1,cost,weight);
+      int t2=0;
+      if ((weight+w[i])<=W){
+          t2=knap(i+1,cost+c[i],weight+w[i]);
+      }
+      if (t1>t2) return t1; else return t2;
+    }
+}
+////////////////////////////////////////////////////////////////
+int Rec(int pos,int wt){
+   int max=0;
+   int t1=0;
+   for(int i=pos;i<N;i++){
+      int t=wt-w[i];
+      if (t>=0){
+         t1=c[i]+Rec(i+1,t);
+         if (t1>max) max=t1;
+      }
+   }
+
+   return max;
+}
+
+//////////////////////////////////////////////////////////////////
+
+int getMaxRecursive(int pos,int capacity)
+{
+    if(pos == N)
+    {
+        return 0;
+    }
+    int res = getMaxRecursive(pos + 1, capacity);
+    if(capacity >= weight[pos])
+    {
+        res = max(res, getMaxRecursive(pos + 1, capacity - weight[pos]) + cost[pos]);
+    }
+    return res;
+}
+/////////////////////////////////////////////////////////////
+int getMaxIterative()
+{
+    int res = 0;
+    for(int i = 0; i < (1<<N); i++)
+    {
+        int curCost = 0;
+        int curWeight = 0;
+        for(int j = 0; j < N; j++)
+        {
+            if(i & (1<<j))
+            {
+                curCost += cost[j];
+                curWeight += weight[j];
+            }
+        }
+        if(curWeight <= maxWeight && curCost > res)
+        {
+            res = curCost;
+        }
+    }
+    return res;
+}
