@@ -1,25 +1,25 @@
-package ru.lebedev.se.lesson6;
+package ru.lebedev.se.lesson6.homework;
 
-public class Stack {
+public class StackTwo {
     private int maxSize;
-    private Node[] stack;
+    private NodeTwo[] stack;
     private int top;
 
-    public Stack(int size) {
+    public StackTwo(int size) {
         this.maxSize = size;
-        this.stack = new Node[this.maxSize];
+        this.stack = new NodeTwo[this.maxSize];
         this.top = -1;
     }
 
-    public void push(Node n) {
+    public void push(NodeTwo n) {
         this.stack[++this.top] = n;
     }
 
-    public Node pop() {
+    public NodeTwo pop() {
         return this.stack[this.top--];
     }
 
-    public Node peek() {
+    public NodeTwo peek() {
         return this.stack[this.top];
     }
 

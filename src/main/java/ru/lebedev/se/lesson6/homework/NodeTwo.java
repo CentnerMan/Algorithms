@@ -1,12 +1,14 @@
-package ru.lebedev.se.lesson6;
+package ru.lebedev.se.lesson6.homework;
 
-public class Node {
-    public Person person;
-    public Node leftChild;
-    public Node rightChild;
+import ru.lebedev.se.lesson6.Person;
+
+public class NodeTwo {
+    public int number;
+    public NodeTwo leftChild;
+    public NodeTwo rightChild;
 
     public void display() {
-        System.out.println("Name: " + person.name + ", age: " + person.age);
+        System.out.println(number);
     }
 
 }

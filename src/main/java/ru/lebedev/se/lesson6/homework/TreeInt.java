@@ -1,12 +1,12 @@
-package ru.lebedev.se.lesson6;
+package ru.lebedev.se.lesson6.homework;
 
-public class Tree {
-    private Node root;
+public class TreeInt {
+    private NodeTwo root;
 
-    public Node find(int key) {
-        Node current = root;
-        while (current.person.id != key) {
-            if (key < current.person.id) {
+    public NodeTwo find(int key) {
+        NodeTwo current = root;
+        while (current.number != key) {
+            if (key < current.number) {
                 current = current.leftChild;
             } else {
                 current = current.rightChild;
@@ -19,17 +19,17 @@ public class Tree {
         return current;
     }
 
-    public void insert(Person person) {
-        Node node = new Node();
-        node.person = person;
+    public void insert(int num) {
+        NodeTwo node = new NodeTwo();
+        node.number = num;
         if (root == null) {
             root = node;
         } else {
-            Node current = root;
-            Node parent;
+            NodeTwo current = root;
+            NodeTwo parent;
             while (true) {
                 parent = current;
-                if (person.id < current.person.id) {
+                if (num < current.number) {
                     current = current.leftChild;
                     if (current == null) {
                         parent.leftChild = node;
@@ -46,14 +46,14 @@ public class Tree {
         }
     }
 
-    public boolean delete(int id) {
-        Node current = root;
-        Node parent = root;
+    public boolean delete(int num) {
+        NodeTwo current = root;
+        NodeTwo parent = root;
         boolean isLeftChild = true;
 
-        while (current.person.id != id) {
+        while (current.number != num) {
             parent = current;
-            if (id < current.person.id) {
+            if (num < current.number) {
                 isLeftChild = true;
                 current = current.leftChild;
             } else {
@@ -96,7 +96,7 @@ public class Tree {
                 parent.rightChild = current.rightChild;
             }
         } else {
-            Node successor = getSuccesor(current);
+            NodeTwo successor = getSuccesor(current);
             if (current == root) {
                 root = successor;
             } else if (isLeftChild) {
@@ -109,10 +109,10 @@ public class Tree {
         return true;
     }
 
-    public Node getSuccesor(Node node) {
-        Node successorParent = node;
-        Node successor = node;
-        Node current = node.rightChild;
+    public NodeTwo getSuccesor(NodeTwo node) {
+        NodeTwo successorParent = node;
+        NodeTwo successor = node;
+        NodeTwo current = node.rightChild;
 
         while (current != null) {
             successorParent = successor;
@@ -136,7 +136,7 @@ public class Tree {
         }
     }
 
-    private void preOrder(Node rootNode) {
+    private void preOrder(NodeTwo rootNode) {
         if (rootNode != null) {
             rootNode.display();
             preOrder(rootNode.leftChild);
@@ -144,7 +144,7 @@ public class Tree {
         }
     }
 
-    private void postOrder(Node rootNode) {
+    private void postOrder(NodeTwo rootNode) {
         if (rootNode != null) {
             postOrder(rootNode.leftChild);
             postOrder(rootNode.rightChild);
@@ -152,7 +152,7 @@ public class Tree {
         }
     }
 
-    private void inOrder(Node rootNode) {
+    private void inOrder(NodeTwo rootNode) {
         if (rootNode != null) {
             inOrder(rootNode.leftChild);
             rootNode.display();
@@ -161,19 +161,19 @@ public class Tree {
     }
 
     public void displayTree() {
-        Stack stack = new Stack(100);
-        stack.push(root);
+        StackTwo stackTwo = new StackTwo(100);
+        stackTwo.push(root);
         int nBlanks = 32;
         boolean isRowEmpty = false;
 
         while (!isRowEmpty) {
-            Stack localStack = new Stack(100);
+            StackTwo localStack = new StackTwo(100);
             isRowEmpty = true;
             for (int i = 0; i < nBlanks; i++) {
                 System.out.print(' ');
             }
-            while (!stack.isEmpty()) {
-                Node temp = stack.pop();
+            while (!stackTwo.isEmpty()) {
+                NodeTwo temp = stackTwo.pop();
                 if (temp != null) {
                     temp.display();
                     localStack.push(temp.leftChild);
@@ -184,19 +184,57 @@ public class Tree {
                 } else {
                     System.out.print("--");
                     localStack.push(null);
-                    localStack.push(null);
+//                    localStack.push(null);
                 }
-                for (int j = 0; j < nBlanks * 2 - 2; j++)
+                for (int j = 0; j < (nBlanks * 2 - 2); j++)
                     System.out.print(' ');
             }
-            System.out.println(" ");
+            System.out.println(' ');
             nBlanks = nBlanks / 2;
             while (!localStack.isEmpty()) {
-                stack.push(localStack.pop());
+                stackTwo.push(localStack.pop());
             }
             System.out.println("......................................................");
         }
     }
 
+    public NodeTwo getRoot() {
+        return root;
+    }
+
+    //-----------------------------------------
+    boolean isBalanced(NodeTwo rootNode) {
+        if (longestPath(rootNode) - shortestPath(rootNode) > 1)
+            return false;
+        else
+            return true;
+    }
+
+
+    int longestPath(NodeTwo rootNode) {
+        if (rootNode == null) {
+            return 0;
+        } else {
+            int leftPathLength = longestPath(rootNode.leftChild);
+            int rightPathLength = longestPath(rootNode.rightChild);
+            if (leftPathLength >= rightPathLength)
+                return leftPathLength + 1;
+            else
+                return rightPathLength + 1;
+        }
+    }
+
+    int shortestPath(NodeTwo rootNode) {
+        if (rootNode == null) {
+            return 0;
+        } else {
+            int leftPathLength = shortestPath(rootNode.leftChild);
+            int rightPathLength = shortestPath(rootNode.rightChild);
+            if (leftPathLength <= rightPathLength)
+                return leftPathLength + 1;
+            else
+                return rightPathLength + 1;
+        }
+    }
 
 }
