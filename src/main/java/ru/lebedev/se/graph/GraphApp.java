@@ -31,7 +31,7 @@ public class GraphApp {
         graph.addEdge(6, 8); //GI
         graph.addEdge(7, 8); //HI
 
-        graph.bfsShort(0,8);
+        graph.bfsBig(0,8);
     }
 
 }

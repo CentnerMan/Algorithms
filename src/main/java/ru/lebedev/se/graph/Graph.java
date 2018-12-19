@@ -84,10 +84,30 @@ public class Graph {
         System.out.println(vertexList[vertex].label);
     }
 
+    // homework -----------------------------------------------------------------------------
+
+    public void bfsBig(int start, int end) {
+        stackPath = new Stack(MAX_VERTS); // Стек узлов пути
+        int lengthPath = 0; //Длина пути
+        int num = 0;
+        bfsShort(start, end);
+        stackPath.push(start);
+        while (!stackPath.isEmpty()) {
+            num = stackPath.pop();
+            System.out.println(vertexList[num].label);
+            lengthPath++;
+        }
+        System.out.println("Длина короткого пути: " + lengthPath);
+    }
+
     public void bfsShort(int start, int end) { //кратчайший путь
 
         for (int i = 0; i < size; i++) // Сброс флагов
             vertexList[i].wasVisited = false;
+
+        while (!queue.isEmpty()) { // Очистка очереди
+            queue.remove();
+        }
 
         if (end != start) {
             vertexList[start].wasVisited = true;
@@ -96,16 +116,14 @@ public class Graph {
             while (!queue.isEmpty()) {
                 int v1 = queue.remove();
                 while ((v2 = getAdjUnvisitedVertex(v1)) != -1) {
-                    if (vertexList[v2].label == vertexList[end].label) {
-
-                    } else {
-                        vertexList[v2].wasVisited = true; // Пометка
-                        queue.insert(v2);
+                    if (vertexList[v2] == vertexList[end]) {
+                        stackPath.push(v2);
+                        bfsShort(start, v1);
                     }
-
+                    vertexList[v2].wasVisited = true; // Пометка
+                    queue.insert(v2);
                 }
             }
         }
     }
-
 }
