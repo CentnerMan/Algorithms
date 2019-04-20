@@ -2,7 +2,7 @@ package ru.lebedev.se.lesson2.sortint;
 
 public class Main {
     public static void main(String[] args) {
-        int size = 10000;
+        int size = 1000000;
         ArrayInt arr1 = new ArrayInt(size);
         for (int i = 0; i < size; i++) arr1.insert((int) (Math.random() * Integer.MAX_VALUE));
 
